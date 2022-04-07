@@ -10,11 +10,6 @@ app.use(express.static('public'));
 // import the dataset to be used here
 const garments = require('./garments.json');
 // import the dataset to be used here
-app.get('/api/garments', function(req, res) {
-    // note that this route just send JSON data to the browser
-    // there is no template
-    res.json({ garments });
-});
 
 app.get('/api/garments', function(req, res) {
 

@@ -20,15 +20,7 @@ genderOptions.addEventListener('click', function(evt) {
     filterData();
 });
 
-function garments() {
-    axios
-        .get(`/api/garments=${seasonFilter}`)
-        .then(function(result) {
-            searchResultsElem.innerHTML = garmentsTemplate({
-                garments: result.data.garments
-            })
-        });
-}
+
 
 
 function filterData() {
@@ -54,4 +46,3 @@ priceRangeElem.addEventListener('change', function(evt) {
 });
 
 filterData();
-garments();
