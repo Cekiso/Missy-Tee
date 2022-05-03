@@ -1,0 +1,8 @@
+GET http://localhost:4000/posts
+Authorazation:
+###
+POSTS http://localhost:4000/login
+Content-Type: Application/json
+{
+    username: "Cekiso"
+}

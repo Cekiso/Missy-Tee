@@ -86,29 +86,66 @@ app.post('/api/garments', (req, res) => {
     // only 3 fields are made mandatory here
     // you can change that
 
-    if (!description || !img || !price) {
+
+    if (!description) {
         res.json({
             status: 'error',
-            message: 'Required data not supplied',
+            message: 'Description required data not supplied',
+        });
+    } else if (!img) {
+        res.json({
+            status: 'error',
+            message: 'Image is required data not supplied',
+        });
+    } else if (!gender) {
+        res.json({
+            status: 'error',
+            message: 'Gender required data not supplied',
+        });
+
+    } else if (!price) {
+        res.json({
+            status: 'error',
+            message: 'Price required data not supplied',
+        });
+    } else if (!season) {
+        res.json({
+            status: 'error',
+            message: 'season required data not supplied',
         });
     } else {
 
         // you can check for duplicates here using garments.find
+        const duplicate = garments.find(function(garments) {
+            if (garments.img == img && garments.price == price && garments.description == description && garments.season == season) {
+                const duplicateItem = JSON.stringify(garments)
+                return duplicateItem
+            }
 
-        // add a new entry into the garments list
-        garments.push({
-            description,
-            img,
-            gender,
-            season,
-            price
-        });
+        })
+        if (duplicate == undefined) {
 
-        res.json({
-            status: 'success',
-            message: 'New garment added.',
-        });
+
+            // add a new entry into the garments list
+            garments.push({
+                description,
+                img,
+                gender,
+                season,
+                price
+            });
+        } else {
+            res.json({
+                status: 'success',
+                message: 'The garmet is already added',
+            });
+        }
     }
+    res.json({
+        status: 'success',
+        message: 'New garment added.',
+    });
+
 
 });
 
